@@ -1,22 +1,33 @@
-🔵 Herramientas utilizadas
-Scrapy es un marco de trabajo de código abierto de bajo nivel para extraer datos de sitios web y almacenarlos en formatos estructurados como JSON o CSV. Scrapy cuenta con las siguientes herramientas para lograr este objetivo:
+Scraper de Hoteles en TripAdvisor
+En este repositorio, encontrarás un scraper desarrollado en Python utilizando la librería Scrapy, el cual se encarga de obtener información de hoteles en la página de TripAdvisor para la ciudad de Buenos Aires.
 
-Item: Representa un objeto que contiene los datos extraídos de una página web.
-Field: Representa un campo dentro de un objeto Item.
-CrawlSpider: Clase base para spiders que siguen enlaces de una página web a otra.
-Rule: Define una regla de extracción de enlaces y/o procesamiento de respuestas.
-LinkExtractor: Extrae enlaces de una página web.
-ItemLoader: Facilita la carga de datos en un objeto Item.
-Selector: Proporciona una forma sencilla de seleccionar nodos y extraer datos de una página web.
-🔴 Función cumplida por el script
-El script desarrollado en Python utiliza la librería Scrapy para extraer datos de hoteles de la página web de TripAdvisor para Buenos Aires, Argentina. La información extraída incluye:
+🛠 Herramientas utilizadas
+Scrapy: Framework para desarrollar arañas web.
+Python: Lenguaje de programación utilizado para el desarrollo del scraper.
+💻 Funcionamiento del scraper
+El scraper está compuesto por dos clases principales: Hotel y TripAdvisor. La clase Hotel define el esquema de datos a obtener de cada hotel, mientras que la clase TripAdvisor hereda de CrawlSpider y define el comportamiento de la araña web.
 
-Nombre del hotel
-Puntuación del hotel
-Descripción del hotel
-Amenities del hotel
-El script define una clase Hotel que hereda de Item y define cuatro campos: name, score, description y amenities. Luego, se define una clase TripAdvisor que hereda de CrawlSpider y establece los dominios permitidos, las URLs de inicio y el retraso de descarga. La clase también define una regla de extracción que sigue enlaces que coincidan con el patrón Hotel_Review- y llama a la función parse_hotel para procesar la respuesta.
+La araña web comienza extrayendo los datos de la página principal de hoteles en TripAdvisor para Buenos Aires y, a continuación, sigue los enlaces a las páginas individuales de cada hotel. Para cada hotel, se obtienen los siguientes datos:
 
-La función parse_hotel crea un objeto Selector para analizar la respuesta y un objeto ItemLoader para cargar los datos en el objeto Hotel. Luego, se utilizan expresiones XPath para extraer el nombre, la puntuación, la descripción y las amenities del hotel y se cargan en el objeto ItemLoader. Finalmente, se devuelve el objeto ItemLoader cargado.
+Nombre
+Puntuación
+Descripción
+Amenities
+Los datos se almacenan en un archivo CSV utilizando el módulo csv de Python.
 
-Para ejecutar el script, se puede utilizar el comando scrapy runspider trip_scrapy.py -o tripito.csv para guardar los datos extraídos en un archivo CSV llamado tripito.csv.
+🚀 Ejecución del scraper
+Para ejecutar el scraper, sigue los siguientes pasos:
+
+Asegúrate de tener Python y Scrapy instalados en tu sistema.
+Clona este repositorio en tu máquina local.
+Ejecuta el siguiente comando en la terminal para instalar las dependencias del proyecto:
+bash
+Copy code
+pip install -r requirements.txt
+Ejecuta el scraper con el siguiente comando:
+bash
+Copy code
+scrapy runspider trip_scrapy.py -o tripito.csv
+Una vez ejecutado el comando, el scraper generará un archivo CSV llamado tripito.csv con los datos obtenidos de los hoteles en TripAdvisor.
+
+¡Listo! Ahora puedes utilizar los datos obtenidos para tus propios propósitos.
